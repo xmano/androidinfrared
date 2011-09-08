@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class AircActivity extends Activity implements
-		AdapterView.OnItemSelectedListener {
+		AdapterView.OnItemSelectedListener{
 	private boolean editBtns = false;
 	private ControllerManager controllermanager = null;
 	private ControllersSpinnerAdapter controllersAdapter = null;
@@ -62,26 +63,26 @@ public class AircActivity extends Activity implements
 		// controllersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(this.controllersAdapter);
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		this.listControllers();
 		this.renameButtons(false);
 	}
-	
+
 	@Override
 	public void onStop() {
 		this.controllermanager.saveControllers();
-		
+
 		super.onStop();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		savedInstanceState.putBoolean("editBtns", this.editBtns);
-		
+
 		super.onSaveInstanceState(savedInstanceState);
 	}
 
@@ -92,12 +93,46 @@ public class AircActivity extends Activity implements
 	}
 
 	public void onRemoteClick(View view) {
-		Log.i("AIRC", "clicked " + Integer.toString(view.getId()));
 
 		if (this.editBtns) {
-			
+
 		} else {
 			this.controllermanager.click(view.getId());
+		}
+	}
+	
+	public void onControllerDelClick(View view) {
+		final Spinner spinner = (Spinner) findViewById(R.id.ControllerSpinner);
+		final ControllersSpinnerAdapter cadapter = (ControllersSpinnerAdapter) spinner.getAdapter();
+		final Controller controller = (Controller) spinner.getSelectedItem();
+		if (controller != null) {
+			final boolean editBtns_ = editBtns;
+			new AlertDialog.Builder(this)
+					.setTitle("Delete controller")
+					.setMessage("Delete this controller?")
+					.setPositiveButton("Ok",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									controllermanager.remove(controller
+											.getUuid());
+									if (controllermanager.getControllers()
+											.size() > 0)
+										controllermanager
+												.setActiveController((Controller) cadapter
+														.getItem(0));
+									listControllers();
+									spinner.setSelection(0);
+									renameButtons(editBtns_);
+								}
+							})
+					.setNegativeButton("Cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+
+								}
+							}).show();
 		}
 	}
 
@@ -130,7 +165,7 @@ public class AircActivity extends Activity implements
 							if (controller != null)
 								controller.setKey(new KeyMapping(f_id,
 										f_btnname, f_remote_name, f_btnname));
-							
+
 							renameButtons(true);
 							return true;
 						}
@@ -173,7 +208,15 @@ public class AircActivity extends Activity implements
 	public void renameButtons(boolean showall) {
 		Controller controller = this.controllermanager.getActiveController();
 
-		TableLayout layout = (TableLayout) findViewById(R.id.BtnTable);
+		{
+			final Button b = (Button) findViewById(R.id.delCntrlBtn);
+			if (this.editBtns)
+				b.setVisibility(View.VISIBLE);
+			else
+				b.setVisibility(View.GONE);
+		}
+
+		TableLayout layout = (TableLayout) findViewById(R.id.BtnTable);;
 		if (layout != null) {
 			for (int i = 0; i < layout.getChildCount(); i++) {
 				TableRow tr = (TableRow) layout.getChildAt(i);
@@ -201,12 +244,12 @@ public class AircActivity extends Activity implements
 
 	public void listControllers() {
 		Spinner spinner = (Spinner) findViewById(R.id.ControllerSpinner);
-		
+
 		spinner.setOnItemSelectedListener(null);
-		
-		//this.controllersAdapter.clear();
+
+		this.controllersAdapter.clear();
 		this.controllersAdapter.putAll(this.controllermanager.getControllers());
-		
+
 		spinner.setOnItemSelectedListener(this);
 	}
 
@@ -228,6 +271,7 @@ public class AircActivity extends Activity implements
 				.getAdapter();
 		Controller controller = (Controller) cadapter.getItem(position);
 		if (controller == null) {
+			final boolean editBtns_ = editBtns;
 			final EditText input = new EditText(this);
 			new AlertDialog.Builder(this)
 					.setTitle("New controller")
@@ -244,10 +288,12 @@ public class AircActivity extends Activity implements
 									controllermanager.put(new_controller);
 									controllermanager
 											.setActiveController(new_controller);
-									
+
 									Spinner spinner = (Spinner) findViewById(R.id.ControllerSpinner);
 									listControllers();
-									spinner.setSelection(controllersAdapter.getCount()-2);
+									spinner.setSelection(controllersAdapter
+											.getCount() - 2);
+									renameButtons(editBtns_);
 								}
 							})
 					.setNegativeButton("Cancel",
@@ -259,6 +305,7 @@ public class AircActivity extends Activity implements
 							}).show();
 		} else {
 			this.controllermanager.setActiveController(controller);
+			renameButtons(this.editBtns);
 		}
 	}
 }

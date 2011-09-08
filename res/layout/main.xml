@@ -6,38 +6,39 @@
     android:id="@+id/MainLayout">
     <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/ControllerMenuLayout">
         <Spinner android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ControllerSpinner"></Spinner>
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:id="@+id/delCntrlBtn" android:text="@string/del" android:onClick="onControllerDelClick"></Button>
     </LinearLayout>
     <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:layout_height="wrap_content" android:id="@+id/status" android:text="@string/controllermode" android:editable="false" android:visibility="visible"></TextView>
     <TableLayout android:id="@+id/BtnTable" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="20px" android:layout_weight="1">
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnRow1">
-            <Button android:layout_width="wrap_content" android:id="@+id/btn10" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn11" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn12" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn13" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn14" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/btnRow1">
+            <Button android:layout_width="match_parent" android:id="@+id/btn10" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn11" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn12" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn13" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn14" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
         </TableRow>
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnRow2">
-            <Button android:layout_width="wrap_content" android:id="@+id/btn20" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn21" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn22" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn23" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn24" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
+        <TableRow android:layout_width="match_parent" android:layout_height="fill_parent" android:id="@+id/btnRow2">
+            <Button android:layout_width="match_parent" android:id="@+id/btn20" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn21" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn22" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn23" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn24" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
         </TableRow>
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnRow3">
-            <Button android:layout_width="wrap_content" android:id="@+id/btn30" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn31" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn32" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn33" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn34" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/btnRow3">
+            <Button android:layout_width="match_parent" android:id="@+id/btn30" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn31" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn32" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn33" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn34" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
         </TableRow>
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnRow4">
-            <Button android:layout_width="wrap_content" android:id="@+id/btn40" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn41" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn42" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn43" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
-            <Button android:layout_width="wrap_content" android:id="@+id/btn44" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/btnRow4">
+            <Button android:layout_width="match_parent" android:id="@+id/btn40" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn41" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn42" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn43" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
+            <Button android:layout_width="match_parent" android:id="@+id/btn44" android:text="Button" android:layout_height="match_parent" android:onClick="onRemoteClick"></Button>
         </TableRow>
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnRow5">
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/btnRow5">
             <Button android:layout_width="wrap_content" android:id="@+id/btn50" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
             <Button android:layout_width="wrap_content" android:id="@+id/btn51" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>
             <Button android:layout_width="wrap_content" android:id="@+id/btn52" android:text="Button" android:layout_height="wrap_content" android:onClick="onRemoteClick"></Button>

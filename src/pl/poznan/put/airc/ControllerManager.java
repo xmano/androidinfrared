@@ -32,6 +32,8 @@ public class ControllerManager {
 	private HashMap<String, Remote> remotes = null;
 
 	private Controller activeController = null;
+	private ToneSynthesizer synth = new ToneSynthesizer(
+			AudioFormat.CHANNEL_OUT_STEREO, 19000);
 
 	public ControllerManager(Context context) {
 		this.context = context;
@@ -160,7 +162,7 @@ public class ControllerManager {
 			KeyMapping keymapping = this.activeController.getKey(id);
 			if (keymapping != null) {
 				Remote remote = this.getRemotes().get(keymapping.remote_name);
-				ArrayList<Integer> signalspacelist = remote
+				final ArrayList<Integer> signalspacelist = remote
 						.playButton(keymapping.remote_key);
 
 				if (signalspacelist != null && signalspacelist.size() > 0) {
@@ -171,14 +173,19 @@ public class ControllerManager {
 							.setStreamVolume(
 									AudioManager.STREAM_MUSIC,
 									audioManager
-											.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+											.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * 10 / 8,
 									0);
 
-					ToneSynthesizer synth = new ToneSynthesizer(
-							AudioFormat.CHANNEL_OUT_STEREO);
-					synth.playTone(19000, signalspacelist);
-					//AudioTrack audioTrack = synth.toneRawToAudioTrack(synth		.genToneRaw(19000, signalspacelist));
-					//audioTrack.play();
+					new Thread(new Runnable() {
+						public void run() {
+							synth.playTone(signalspacelist);
+							Log.i("AIRC", "kkkk");
+						}
+					}).start();
+
+					// AudioTrack audioTrack = synth.toneRawToAudioTrack(synth
+					// .genToneRaw(19000, signalspacelist));
+					// audioTrack.play();
 				}
 			}
 		}
@@ -199,6 +206,28 @@ public class ControllerManager {
 	public void saveControllers() {
 		File controllersDir = this.context.getDir("controllers",
 				Context.MODE_PRIVATE);
+
+		for (File file : controllersDir.listFiles()) {
+			if (file.isFile() && file.canWrite()) {
+				if (file.getName().toLowerCase().endsWith(".json")) {
+					try {
+						if (file.delete())
+							Log.d("AIRC",
+									"Controller file deleted: "
+											+ file.getName());
+						else
+							Log.wtf("AIRC", "Controller file NOT deleted: "
+									+ file.getName());
+					} catch (SecurityException e) {
+						Log.wtf("AIRC",
+								"Controller file NOT deleted: "
+										+ file.getName());
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
 		for (Controller controller : this.controllers.values()) {
 			boolean success = false;
 			try {
@@ -220,10 +249,19 @@ public class ControllerManager {
 						"Controller dumping unsuccesful - "
 								+ controller.getUuid().toString() + " - "
 								+ controller.getName());
+			else
+				Log.d("AIRC",
+						"Controller dumping succesful - "
+								+ controller.getUuid().toString() + " - "
+								+ controller.getName());
 		}
 	}
 
 	void put(Controller controller) {
 		this.controllers.put(controller.getUuid(), controller);
+	}
+
+	void remove(UUID controller_uuid) {
+		this.controllers.remove(controller_uuid);
 	}
 }

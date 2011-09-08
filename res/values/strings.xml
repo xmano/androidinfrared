@@ -10,4 +10,5 @@
     <string name="controllermode">Remote controller mode</string>
     <string name="dlcaptiontext">Please find desired remote</string>
     <string name="new_controller">New controller</string>
+    <string name="del">Del</string>
 </resources>

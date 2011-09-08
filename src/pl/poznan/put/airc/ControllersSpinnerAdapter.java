@@ -90,7 +90,6 @@ public class ControllersSpinnerAdapter extends LinkedHashMap<UUID, Controller>
 	@Override
 	public void registerDataSetObserver(DataSetObserver observer) {
 		observers.add(observer);
-		Log.i("AIRC", "obs! " + observer.toString());
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import android.util.Log;
+
 /**
  * 
  * As reference http://winlirc.sourceforge.net/technicaldetails.html was used
