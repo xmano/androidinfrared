@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:checked="false" android:checkable="true" android:enabled="true" android:visible="true" android:id="@+id/editkeys" android:title="Edit keys" android:titleCondensed="Keys"></item><item android:id="@+id/editcontrollers" android:titleCondensed="Remotes" android:title="Download remotes"></item>
+    
+</menu>

@@ -2,4 +2,12 @@
 <resources>
     <string name="hello">Hello World, AircActivity!</string>
     <string name="app_name">Airc</string>
+    <string name="editcontroller">Edit controller</string>
+    <string name="delcontroller">Delete controller</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="editingkeys">Keys editing mode</string>
+    <string name="controllermode">Remote controller mode</string>
+    <string name="dlcaptiontext">Please find desired remote</string>
+    <string name="new_controller">New controller</string>
 </resources>
